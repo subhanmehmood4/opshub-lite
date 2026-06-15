@@ -8,6 +8,6 @@ export async function GET() {
     ready,
     message: ready
       ? "OpsHub is configured and ready."
-      : "Add OpenAI and Supabase keys to .env.local to enable all features.",
+      : "Add Gemini and Supabase keys to .env.local to enable all features.",
   });
 }

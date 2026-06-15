@@ -10,7 +10,7 @@ Live demo SaaS dashboard for [DevAxon](https://devaxon.com) — authentication, 
 - **KPI cards** — MRR, active users, churn, ARPU
 - **Charts** — revenue (area), users (bar), plan breakdown (pie)
 - **Data table** — monthly metrics with sort and filter
-- **AI Copilot** — GPT-4o-mini answers grounded in `lib/demoData.ts`
+- **AI Copilot** — Gemini answers grounded in `lib/demoData.ts`
 
 ## Tech stack
 
@@ -18,7 +18,7 @@ Live demo SaaS dashboard for [DevAxon](https://devaxon.com) — authentication, 
 - Tailwind CSS
 - Supabase (Auth)
 - Recharts
-- OpenAI API (`gpt-4o-mini`)
+- Google Gemini (`gemini-2.0-flash`) — free tier available
 
 ## Quick start
 
@@ -38,7 +38,7 @@ Create `.env.local` from `.env.example`:
 
 | Variable | Description |
 |----------|-------------|
-| `OPENAI_API_KEY` | OpenAI API key (server-side only) |
+| `GEMINI_API_KEY` | Google Gemini API key (server-side only) |
 | `NEXT_PUBLIC_SUPABASE_URL` | Supabase project URL |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase anon/public key |
 | `DEMO_EMAIL` | Shared demo account email |
@@ -66,7 +66,7 @@ Add these in [Vercel → opshub-lite → Settings → Environment Variables](htt
 
 | Variable | Required | Description |
 |----------|----------|-------------|
-| `OPENAI_API_KEY` | Yes (copilot) | OpenAI API key |
+| `GEMINI_API_KEY` | Yes (copilot) | [Google AI Studio](https://aistudio.google.com/apikey) API key |
 | `NEXT_PUBLIC_SUPABASE_URL` | Yes (auth) | Supabase project URL |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Yes (auth) | Supabase anon key |
 | `DEMO_EMAIL` | Optional | Shared demo account email |
@@ -96,7 +96,7 @@ opshub-lite/
   components/             UI (KPI, charts, table, copilot)
   lib/
     demoData.ts           Single source of truth for metrics
-    openai.ts             Copilot prompt + API call
+    google.ts             Copilot prompt + Gemini API call
     supabase/             Auth clients
   middleware.ts           Protect /dashboard routes
 ```
