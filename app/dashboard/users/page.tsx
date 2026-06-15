@@ -1,3 +1,4 @@
+import CustomersTable from "@/components/CustomersTable";
 import DataTable from "@/components/DataTable";
 import KpiGrid from "@/components/KpiCard";
 import UsersChart from "@/components/UsersChart";
@@ -36,6 +37,7 @@ export default function UsersPage() {
         </div>
       </div>
 
+      <CustomersTable />
       <DataTable />
     </>
   );

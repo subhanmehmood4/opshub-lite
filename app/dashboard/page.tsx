@@ -1,3 +1,4 @@
+import ActivityFeed from "@/components/ActivityFeed";
 import DataTable from "@/components/DataTable";
 import KpiGrid from "@/components/KpiCard";
 import PlansChart from "@/components/PlansChart";
@@ -18,8 +19,10 @@ export default function OverviewPage() {
         <div className="xl:col-span-2">
           <DataTable />
         </div>
-        <PlansChart />
+        <ActivityFeed />
       </div>
+
+      <PlansChart />
     </>
   );
 }

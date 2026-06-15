@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { DEFAULT_USER_NAME } from "@/lib/constants";
 import { createClient } from "@/lib/supabase/client";
 
 interface TopbarProps {
@@ -10,6 +11,8 @@ interface TopbarProps {
   onToggleCopilot: () => void;
   onMenuClick: () => void;
 }
+
+const DATE_RANGES = ["Last 7 days", "Last 30 days", "Last 12 months"];
 
 export default function Topbar({
   title,
@@ -26,6 +29,8 @@ export default function Topbar({
     router.push("/");
     router.refresh();
   }
+
+  const displayName = userEmail?.split("@")[0] ?? DEFAULT_USER_NAME;
 
   return (
     <header className="sticky top-0 z-30 flex h-16 items-center justify-between border-b border-slate-800 bg-slate-950/90 px-4 backdrop-blur-md sm:px-6">
@@ -47,6 +52,18 @@ export default function Topbar({
       </div>
 
       <div className="flex items-center gap-2 sm:gap-3">
+        <select
+          defaultValue="Last 12 months"
+          aria-label="Date range"
+          className="hidden rounded-xl border border-slate-800 bg-slate-900 px-3 py-2 text-xs text-slate-300 focus:border-emerald-500/50 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 md:block"
+        >
+          {DATE_RANGES.map((range) => (
+            <option key={range} value={range}>
+              {range}
+            </option>
+          ))}
+        </select>
+
         <button
           type="button"
           onClick={onToggleCopilot}
@@ -58,13 +75,16 @@ export default function Topbar({
         >
           <span className="hidden sm:inline">AI Copilot</span>
           <span className="sm:hidden">Copilot</span>
+          <span className="rounded-full bg-emerald-500 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-slate-950">
+            New
+          </span>
         </button>
 
         <div className="hidden items-center gap-2 rounded-xl bg-slate-900 px-3 py-2 ring-1 ring-slate-800 sm:flex">
-          <span className="h-2 w-2 rounded-full bg-emerald-400" />
-          <span className="max-w-[160px] truncate text-xs text-slate-400">
-            {userEmail ?? "Demo user"}
+          <span className="flex h-6 w-6 items-center justify-center rounded-full bg-emerald-500/20 text-[10px] font-semibold text-emerald-400">
+            {displayName.charAt(0).toUpperCase()}
           </span>
+          <span className="max-w-[140px] truncate text-xs text-slate-300">{displayName}</span>
         </div>
 
         <button

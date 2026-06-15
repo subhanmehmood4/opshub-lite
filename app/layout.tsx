@@ -8,12 +8,13 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "OpsHub — SaaS Analytics Dashboard",
+  title: "OpsHub — Operations Analytics for SaaS Teams",
   description:
-    "Real-time SaaS metrics dashboard with an AI copilot that answers questions about your data.",
+    "Unified analytics for operations teams. Revenue, users, churn, and plan mix in one dashboard — with an AI copilot for ad-hoc questions.",
   openGraph: {
-    title: "OpsHub — SaaS Analytics Dashboard",
-    description: "Premium SaaS dashboard demo with AI analytics copilot.",
+    title: "OpsHub — Operations Analytics for SaaS Teams",
+    description:
+      "Stop reconciling ops data in spreadsheets. Live metrics and AI-powered insights in one platform.",
   },
 };
 

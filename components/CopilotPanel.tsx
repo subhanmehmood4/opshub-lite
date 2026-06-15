@@ -23,7 +23,7 @@ export default function CopilotPanel({ open, onClose }: CopilotPanelProps) {
     {
       role: "assistant",
       content:
-        "Hi! I'm your OpsHub analytics copilot. Ask me anything about the dashboard metrics — revenue, users, churn, or plan breakdown.",
+        "Phase 2: Ask anything about your metrics in plain English. I answer using your live dashboard data — revenue, users, churn, and plan breakdown.",
     },
   ]);
   const [input, setInput] = useState("");
@@ -93,7 +93,7 @@ export default function CopilotPanel({ open, onClose }: CopilotPanelProps) {
         <div className="flex items-center justify-between border-b border-slate-800 px-4 py-3">
           <div>
             <p className="text-sm font-semibold text-white">AI Copilot</p>
-            <p className="text-xs text-slate-500">Powered by your dashboard data</p>
+            <p className="text-xs text-slate-500">Powered by your live dashboard data</p>
           </div>
           <button
             type="button"

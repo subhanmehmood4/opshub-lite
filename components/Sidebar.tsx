@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { WORKSPACE_ENV, WORKSPACE_NAME } from "@/lib/constants";
 
 interface SidebarProps {
   open: boolean;
@@ -70,7 +71,9 @@ export default function Sidebar({ open, onClose }: SidebarProps) {
         </nav>
 
         <div className="border-t border-slate-800 p-4">
-          <p className="text-xs text-slate-500">Demo data · Read-only</p>
+          <p className="text-xs text-slate-500">
+            {WORKSPACE_NAME} · {WORKSPACE_ENV}
+          </p>
         </div>
       </aside>
     </>

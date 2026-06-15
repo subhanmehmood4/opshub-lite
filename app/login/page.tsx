@@ -84,9 +84,9 @@ function LoginForm() {
             <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-500/15 ring-1 ring-emerald-500/30">
               <span className="font-bold text-emerald-400">O</span>
             </div>
-            <h1 className="text-2xl font-semibold text-white">Sign in to OpsHub</h1>
+            <h1 className="text-2xl font-semibold text-white">Welcome back</h1>
             <p className="mt-2 text-sm text-slate-400">
-              Use the one-click demo or create an account.
+              No credit card. Explore the full product.
             </p>
           </div>
 
@@ -96,7 +96,7 @@ function LoginForm() {
             disabled={loading}
             className="w-full rounded-xl bg-emerald-500 py-3 text-sm font-semibold text-slate-950 transition hover:bg-emerald-400 disabled:opacity-50"
           >
-            Enter Demo
+            Try OpsHub free
           </button>
 
           <div className="my-6 flex items-center gap-3">
