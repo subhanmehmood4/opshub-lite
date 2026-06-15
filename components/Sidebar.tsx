@@ -1,18 +1,28 @@
 "use client";
 
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
 interface SidebarProps {
   open: boolean;
   onClose: () => void;
 }
 
 const NAV_ITEMS = [
-  { label: "Overview", href: "/dashboard", active: true },
-  { label: "Revenue", href: "#", active: false },
-  { label: "Users", href: "#", active: false },
-  { label: "Settings", href: "#", active: false },
+  { label: "Overview", href: "/dashboard" },
+  { label: "Revenue", href: "/dashboard/revenue" },
+  { label: "Users", href: "/dashboard/users" },
+  { label: "Settings", href: "/dashboard/settings" },
 ];
 
+function isActive(pathname: string, href: string) {
+  if (href === "/dashboard") return pathname === "/dashboard";
+  return pathname.startsWith(href);
+}
+
 export default function Sidebar({ open, onClose }: SidebarProps) {
+  const pathname = usePathname();
+
   return (
     <>
       {open && (
@@ -40,25 +50,27 @@ export default function Sidebar({ open, onClose }: SidebarProps) {
         </div>
 
         <nav className="flex-1 space-y-1 p-4">
-          {NAV_ITEMS.map((item) => (
-            <a
-              key={item.label}
-              href={item.href}
-              className={`flex items-center rounded-xl px-3 py-2.5 text-sm font-medium transition ${
-                item.active
-                  ? "bg-emerald-500/10 text-emerald-400 ring-1 ring-emerald-500/20"
-                  : "text-slate-400 hover:bg-slate-900 hover:text-slate-200"
-              }`}
-            >
-              {item.label}
-            </a>
-          ))}
+          {NAV_ITEMS.map((item) => {
+            const active = isActive(pathname, item.href);
+            return (
+              <Link
+                key={item.label}
+                href={item.href}
+                onClick={onClose}
+                className={`flex items-center rounded-xl px-3 py-2.5 text-sm font-medium transition ${
+                  active
+                    ? "bg-emerald-500/10 text-emerald-400 ring-1 ring-emerald-500/20"
+                    : "text-slate-400 hover:bg-slate-900 hover:text-slate-200"
+                }`}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
         </nav>
 
         <div className="border-t border-slate-800 p-4">
-          <p className="text-xs text-slate-500">
-            Demo data · Read-only
-          </p>
+          <p className="text-xs text-slate-500">Demo data · Read-only</p>
         </div>
       </aside>
     </>

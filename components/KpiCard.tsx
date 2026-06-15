@@ -33,25 +33,44 @@ function KpiCard({ label, value, changePct, changeLabel = "vs last month" }: Kpi
   );
 }
 
-export default function KpiGrid() {
-  return (
-    <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+export default function KpiGrid({ focus = "all" }: { focus?: "all" | "revenue" | "users" }) {
+  const cards = {
+    mrr: (
       <KpiCard label="MRR" value={formatCurrency(metrics.mrr)} changePct={metrics.mrrChangePct} />
+    ),
+    users: (
       <KpiCard
         label="Active Users"
         value={metrics.activeUsers.toLocaleString()}
         changePct={metrics.usersChangePct}
       />
+    ),
+    churn: (
       <KpiCard
         label="Churn Rate"
         value={formatPercent(metrics.churnPct)}
         changePct={metrics.churnChangePct}
       />
+    ),
+    arpu: (
       <KpiCard
         label="Avg Revenue / User"
         value={formatCurrency(metrics.avgRevenuePerUser)}
         changePct={metrics.arpuChangePct}
       />
+    ),
+  };
+
+  const visible =
+    focus === "revenue"
+      ? [cards.mrr, cards.arpu]
+      : focus === "users"
+        ? [cards.users, cards.churn]
+        : [cards.mrr, cards.users, cards.churn, cards.arpu];
+
+  return (
+    <div className={`grid gap-4 sm:grid-cols-2 ${focus === "all" ? "xl:grid-cols-4" : "xl:grid-cols-2"}`}>
+      {visible}
     </div>
   );
 }

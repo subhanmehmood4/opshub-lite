@@ -1,22 +1,29 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 import CopilotPanel from "@/components/CopilotPanel";
-import DataTable from "@/components/DataTable";
-import KpiGrid from "@/components/KpiCard";
-import PlansChart from "@/components/PlansChart";
-import RevenueChart from "@/components/RevenueChart";
 import Sidebar from "@/components/Sidebar";
 import Topbar from "@/components/Topbar";
-import UsersChart from "@/components/UsersChart";
+
+const PAGE_TITLES: Record<string, string> = {
+  "/dashboard": "Overview",
+  "/dashboard/revenue": "Revenue",
+  "/dashboard/users": "Users",
+  "/dashboard/settings": "Settings",
+};
 
 interface DashboardShellProps {
   userEmail?: string | null;
+  children: React.ReactNode;
 }
 
-export default function DashboardShell({ userEmail }: DashboardShellProps) {
+export default function DashboardShell({ userEmail, children }: DashboardShellProps) {
+  const pathname = usePathname();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [copilotOpen, setCopilotOpen] = useState(false);
+
+  const title = PAGE_TITLES[pathname] ?? "Dashboard";
 
   return (
     <div className="flex min-h-screen bg-slate-950">
@@ -24,28 +31,14 @@ export default function DashboardShell({ userEmail }: DashboardShellProps) {
 
       <div className="flex min-w-0 flex-1 flex-col">
         <Topbar
-          title="Overview"
+          title={title}
           userEmail={userEmail}
           copilotOpen={copilotOpen}
           onToggleCopilot={() => setCopilotOpen((open) => !open)}
           onMenuClick={() => setSidebarOpen(true)}
         />
 
-        <main className="flex-1 space-y-6 p-4 sm:p-6 animate-fade-in">
-          <KpiGrid />
-
-          <div className="grid gap-6 xl:grid-cols-2">
-            <RevenueChart />
-            <UsersChart />
-          </div>
-
-          <div className="grid gap-6 xl:grid-cols-3">
-            <div className="xl:col-span-2">
-              <DataTable />
-            </div>
-            <PlansChart />
-          </div>
-        </main>
+        <main className="flex-1 space-y-6 p-4 sm:p-6 animate-fade-in">{children}</main>
       </div>
 
       <CopilotPanel open={copilotOpen} onClose={() => setCopilotOpen(false)} />
