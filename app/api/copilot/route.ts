@@ -1,5 +1,5 @@
 import { getMissingEnvVars } from "@/lib/env";
-import { askCopilot } from "@/lib/google";
+import { askCopilot } from "@/lib/groq";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 import { NextResponse } from "next/server";
 

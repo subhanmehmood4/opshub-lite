@@ -1,6 +1,6 @@
 export function getMissingEnvVars(): string[] {
   const missing: string[] = [];
-  if (!process.env.GEMINI_API_KEY) missing.push("GEMINI_API_KEY");
+  if (!process.env.GROQ_API_KEY) missing.push("GROQ_API_KEY");
   if (!process.env.NEXT_PUBLIC_SUPABASE_URL) missing.push("NEXT_PUBLIC_SUPABASE_URL");
   if (!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) missing.push("NEXT_PUBLIC_SUPABASE_ANON_KEY");
   return missing;
